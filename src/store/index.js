@@ -24,6 +24,17 @@ export default new Vuex.Store({
       1, 2, 4, 8, 16, 32, 64
     ],
 
+    beatEntities:{
+      1: '&#119133;',
+      2: '&#119134;',
+      4: '&#119135;',
+      8: '&#119136;',
+      16: '&#119137;',
+      32: '&#119138;',
+      64: '&#119139;'
+
+    },
+
     minBeat:1,
     maxBeat:69,
 
@@ -85,44 +96,44 @@ export default new Vuex.Store({
 
     changeBeatNum(state, e){
       state.beatNum = e
-      localStorage.setItem('n', e)
+      // localStorage.setItem('n', e)
     },
 
     increaseBeatNum(state){
       if(state.beatNum<state.maxBeat) state.beatNum++
-      localStorage.setItem('n', state.beatNum)
+      // localStorage.setItem('n', state.beatNum)
     },
 
     decreaseBeatNum(state){
       if(state.beatNum>state.minBeat) state.beatNum--
-      localStorage.setItem('n', state.beatNum)
+      // localStorage.setItem('n', state.beatNum)
     },
 
     changeTempo(state, e){
       state.tempo = e
-      localStorage.setItem('t', e)
+      // localStorage.setItem('t', e)
 
     },
 
     increaseTempo(state){
       if(state.tempo<state.maxTempo) state.tempo++
-      localStorage.setItem('t', state.tempo)
+      // localStorage.setItem('t', state.tempo)
 
     },
 
     decreaseTempo(state){
       if(state.tempo>state.minTempo) state.tempo--
-      localStorage.setItem('t', state.tempo)
+      // localStorage.setItem('t', state.tempo)
     },
 
     changeTempoFromTap(state, e){
       state.tempo = Math.floor((state.beatNum/e*1000*60)/state.beatNum)
-      localStorage.setItem('t', state.tempo)
+      // localStorage.setItem('t', state.tempo)
     },
 
     changeBeatType(state, e){
       state.currentBeatType = e
-      localStorage.setItem('d', e)
+      // localStorage.setItem('d', e)
     },
 
     changeBackground(state, e){
@@ -168,6 +179,10 @@ export default new Vuex.Store({
     },
     bpm(state){
       return state.tempo/60
+    },
+    beat_number(state){
+      return state.beatNum
+
     },
     use_dot(state){
       return state.currentBeatType / 2

@@ -1,14 +1,18 @@
 <template>
-<v-row align="center" no-gutters 
+    <v-row align="center" no-gutters 
 :style="{backgroundImage: background}"
 :class="`use-background ${$store.state.backgroundColor}`"
  >
     <v-col align='center'>
           <v-row no-gutters class="ma-1"  justify='center' >
-          <dot ref='dot' :accent="i==0" v-for="(n, i) in $store.state.beatNum" :key="i"/>   
-      </v-row>  
+          <dot ref='dot' :accent="i==0" v-for=" (n,i) in $store.getters.beat_number" :key="i"/>   
+      </v-row> 
+                <!-- <span class="subheading text-center">{{`${$store.state.beatNum}/${$store.state.currentBeatType}`}}</span> -->
+ 
       </v-col>
+
 </v-row>
+
       
 </template>
 
@@ -19,9 +23,12 @@ export default {
 
 
     data(){
+        let item = this.$store.state.beatNum
         return{
             to: [],
             x: undefined,
+            init: item
+
         }
     },
 
@@ -34,9 +41,10 @@ export default {
 
         background(){
             return this.$store.state.background
+        },
+        dots(){
+            return this.init
         }
-
-
 
     },
 
@@ -48,7 +56,7 @@ export default {
                 if(this.$store.state.play){
                         this.to.push(setTimeout(()=>{
                         d.play()
-                        d.stop(this.$stopInterval()-this.$stopInterval()/15)
+                        d.stop(this.$stopInterval())
                     }, i*this.$playInterval()))
                 }
  
@@ -80,6 +88,9 @@ export default {
             }
             return this.stop()
         },
+        number(){
+            return this.$store.state.beatNum
+        }
 
     },
 
@@ -88,6 +99,7 @@ export default {
             this.action(val)
         }
     },
+
 
 
 

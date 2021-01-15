@@ -7,7 +7,7 @@ import vuetify from './plugins/vuetify'
 Vue.config.productionTip = false
 
 Vue.mixin({
-  mounted(){
+   mounted(){
     //costomize
     let a = localStorage.getItem('bg')
     if (a) return this.$store.commit('changeBackground', a) 
@@ -26,14 +26,14 @@ Vue.mixin({
     if (a) this.$store.commit('changeAudioAccent', a) 
 
     //setting
-    a = localStorage.getItem('n')
-    if (a) this.$store.commit('changeBeatNum', a) 
+    // a = localStorage.getItem('n')
+    // if (a) this.$store.commit('changeBeatNum', a) 
 
-    a = localStorage.getItem('t')
-    if (a) this.$store.commit('changeTempo', a) 
+    // a = localStorage.getItem('t')
+    // if (a) this.$store.commit('changeTempo', a) 
 
-    a = localStorage.getItem('d')
-    if (a) this.$store.commit('changeBeatType', a) 
+    // a = localStorage.getItem('d')
+    // if (a) this.$store.commit('changeBeatType', a) 
 
 
   },
@@ -63,7 +63,7 @@ Vue.mixin({
       if(this.$store.state.play){
         this.$stop()
         this.$store.commit(...param)
-        setTimeout(this.$start,15*this.$store.state.beatNum)
+        // setTimeout(this.$start, this.$playInterval()*2)
       }
       else this.$store.commit(...param)
     },

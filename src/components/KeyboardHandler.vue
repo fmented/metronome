@@ -36,7 +36,10 @@ export default {
             v.$whenPlaying(['decreaseBeatNum'])
           }
           if(e.key == '1'){
-            e.ctrlKey ? v.$whenPlaying(['changeBeatType', 16]) : v.$whenPlaying(['changeBeatType', 1])
+            v.$whenPlaying(['changeBeatType', 1])
+          }
+          if(e.key == '!'){
+            v.$whenPlaying(['changeBeatType', 16])
           }
           if(e.key == '2'){
             v.$whenPlaying(['changeBeatType', 2])

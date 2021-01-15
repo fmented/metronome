@@ -1,6 +1,6 @@
 <template>
   <div class="ma-1">
-
+<!-- 
                 <v-progress-circular :size="size+10" value="100" width="5" @click="changeType" :color="$store.state.ringColor"
                 class="v-avatar--metronome"
                 v-if="playing"
@@ -14,16 +14,19 @@
                     class="visible"
                 >
                 </v-avatar>
-                </v-progress-circular>
+                </v-progress-circular> -->
                 <v-progress-circular :size="size+10" value="100" width="5" @click="changeType" :color="$store.state.ringColor"
-                    class="invisible"
-                    v-else>
+                    :class="isPlaying"
+                    >
                                 <v-avatar
                                     :size="size"
                                     :color="`${color}`"
                                     class="visible"
+
                                     
-                                >
+                                > 
+                                <span :class="`${$store.state.ringColor}--text display-2 `+isPlaying" 
+                                v-html="$store.state.beatEntities[$store.state.currentBeatType]"></span>
                 </v-avatar>
                 </v-progress-circular>
 
@@ -87,6 +90,7 @@ export default {
         size(){
             return 50
         },
+
         animationDuration () {
             return `${this.$playInterval()/1000}s`
         },
@@ -107,8 +111,10 @@ export default {
         stop(time){
             setTimeout(()=>{
                 this.display(false)
+                if(this.$refs.sound){
                 this.$refs.sound.pause()
                 this.$refs.sound.currentTime = 0
+                }
             },time)
             
         },
@@ -128,8 +134,9 @@ export default {
 }
 .visible{
     visibility: visible;
+    opacity: 1;
 }
-  @keyframes metronome-example {
+  @keyframes in-fade {
     from {
       visibility: hidden;
     }
@@ -138,11 +145,23 @@ export default {
       visibility: visible;
     }
   }
+@keyframes out-fade {
+    0% {
+opacity: 0;    
+}
 
-  .v-avatar--metronome {
-    animation-name: metronome-example;
+    100% {
+    opacity: 1;
+    visibility: hidden;
+    }
+    
+  }
+
+  .v-out {
+    animation-name: out-fade;
     animation-iteration-count: infinite;
     animation-direction:reverse;
   }
+
 
 </style>

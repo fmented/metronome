@@ -9,6 +9,7 @@
         <span class="subheading">METRONOME</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
+
       <setting :dialog="dialog"/>  
     </v-toolbar>
       </div>
