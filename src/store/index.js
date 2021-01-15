@@ -13,8 +13,9 @@ export default new Vuex.Store({
       beat:[
         {name:'Beat 1', source: require('../assets/audio/beat1.webm')},
         {name:'Beat 2', source: require('../assets/audio/beat2.webm')},
-      ]
+      ],
     },
+
     accent: 0,
     beat: 0,
     tempo: 120,
@@ -60,6 +61,7 @@ export default new Vuex.Store({
   },
   mutations: {
     changeAudioAccent (state, e) {
+      localStorage.setItem('as', e)
       state.accent=e
     },
 
@@ -76,58 +78,70 @@ export default new Vuex.Store({
     },
 
     changeAudioBeat (state, e){
+      localStorage.setItem('bs', e)
       state.beat=e
     },
 
-    changeDot(state){
-      state.dotted = !state.dotted
-    },
 
     changeBeatNum(state, e){
       state.beatNum = e
+      localStorage.setItem('n', e)
     },
 
     increaseBeatNum(state){
       if(state.beatNum<state.maxBeat) state.beatNum++
+      localStorage.setItem('n', state.beatNum)
     },
 
     decreaseBeatNum(state){
       if(state.beatNum>state.minBeat) state.beatNum--
+      localStorage.setItem('n', state.beatNum)
     },
 
     changeTempo(state, e){
       state.tempo = e
+      localStorage.setItem('t', e)
+
     },
 
     increaseTempo(state){
       if(state.tempo<state.maxTempo) state.tempo++
+      localStorage.setItem('t', state.tempo)
+
     },
 
     decreaseTempo(state){
       if(state.tempo>state.minTempo) state.tempo--
+      localStorage.setItem('t', state.tempo)
     },
 
     changeTempoFromTap(state, e){
       state.tempo = Math.floor((state.beatNum/e*1000*60)/state.beatNum)
+      localStorage.setItem('t', state.tempo)
     },
 
     changeBeatType(state, e){
       state.currentBeatType = e
+      localStorage.setItem('d', e)
     },
 
     changeBackground(state, e){
       state.background = e
     },
     changeBackgroundColor(state, e){
+      localStorage.setItem('bc', e)
       state.backgroundColor = e
     },
     changeRingColor(state, e){
+      localStorage.setItem('rc', e)
       state.ringColor = e
     },
     changeAccentColor(state, e){
+      localStorage.setItem('dac', e)
       state.accentColor = e
     },
     changeBeatColor(state, e){
+      localStorage.setItem('dbc', e)
       state.beatColor = e
     }
 

@@ -2,6 +2,8 @@
 <v-row align="center" no-gutters 
 :style="{backgroundImage: background}"
 :class="`use-background ${$store.state.backgroundColor}`"
+@click="log"
+ ref="display"
  >
     <v-col align='center'>
           <v-row no-gutters class="ma-1"  justify='center' >
@@ -41,6 +43,13 @@ export default {
     },
 
     methods:{
+        log(a){
+            let width = this.$vuetify.breakpoint.width
+            if(a.target==this.$refs.display){
+            if(a.clientX > width/2) return this.$store.commit('increaseBeatNum')
+            return this.$store.commit('decreaseBeatNum')
+            }
+        },
 
         start(){
             let dots = this.$refs.dot

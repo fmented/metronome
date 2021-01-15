@@ -1,5 +1,5 @@
 <template>
-    <v-row no-gutters align="end" class="ma-1">
+    <v-row no-gutters align="end" class="ma-1" >
       <v-col>  
         <v-container>
           <v-row
@@ -122,6 +122,7 @@ export default {
     },
 
     methods:{
+
         changeState(){
           this.$store.state.play ? this.stop() : this.start()
         },
@@ -166,7 +167,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
   @keyframes metronome-example {
     from {

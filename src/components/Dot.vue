@@ -1,6 +1,37 @@
 <template>
   <div class="ma-1">
-      <v-progress-circular :size="size+10" value="100" width="5" @click="changeType" :color="$store.state.ringColor"
+
+                <v-progress-circular :size="size+10" value="100" width="5" @click="changeType" :color="$store.state.ringColor"
+                class="v-avatar--metronome"
+                v-if="playing"
+                :style="{
+                            animationDuration: animationDuration
+                        }"
+                >
+                <v-avatar
+                    :size="size"
+                    :color="`${color}`"
+                    class="visible"
+                >
+                </v-avatar>
+                </v-progress-circular>
+                <v-progress-circular :size="size+10" value="100" width="5" @click="changeType" :color="$store.state.ringColor"
+                    class="invisible"
+                    v-else>
+                                <v-avatar
+                                    :size="size"
+                                    :color="`${color}`"
+                                    class="visible"
+                                    
+                                >
+                </v-avatar>
+                </v-progress-circular>
+
+
+            
+
+
+      <!-- <v-progress-circular :size="size+10" value="100" width="5" @click="changeType" :color="$store.state.ringColor"
       :class="isPlaying">
       <v-avatar
           :size="size"
@@ -8,7 +39,7 @@
           class="visible"
       >
       </v-avatar>
-      </v-progress-circular>
+      </v-progress-circular> -->
       <audio :src="audio" class="invisible" ref="sound"></audio>
       
       
@@ -55,7 +86,10 @@ export default {
         },
         size(){
             return 50
-        }
+        },
+        animationDuration () {
+            return `${this.$playInterval()/1000}s`
+        },
         
 
     },
@@ -95,5 +129,20 @@ export default {
 .visible{
     visibility: visible;
 }
+  @keyframes metronome-example {
+    from {
+      visibility: hidden;
+    }
+
+    to {
+      visibility: visible;
+    }
+  }
+
+  .v-avatar--metronome {
+    animation-name: metronome-example;
+    animation-iteration-count: infinite;
+    animation-direction:reverse;
+  }
 
 </style>

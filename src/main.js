@@ -8,8 +8,33 @@ Vue.config.productionTip = false
 
 Vue.mixin({
   mounted(){
+    //costomize
     let a = localStorage.getItem('bg')
     if (a) return this.$store.commit('changeBackground', a) 
+    a = localStorage.getItem('dbc')
+    if (a) this.$store.commit('changeBeatColor', a) 
+    a = localStorage.getItem('dac')
+    if (a) this.$store.commit('changeAccentColor', a) 
+    a = localStorage.getItem('bc')
+    if (a) this.$store.commit('changeBackgroundColor', a) 
+    a = localStorage.getItem('rc')
+    if (a) this.$store.commit('changeRingColor', a)
+    //sound
+    a = localStorage.getItem('bs')
+    if (a) this.$store.commit('changeAudioBeat', a) 
+    a = localStorage.getItem('as')
+    if (a) this.$store.commit('changeAudioAccent', a) 
+
+    //setting
+    a = localStorage.getItem('n')
+    if (a) this.$store.commit('changeBeatNum', a) 
+
+    a = localStorage.getItem('t')
+    if (a) this.$store.commit('changeTempo', a) 
+
+    a = localStorage.getItem('d')
+    if (a) this.$store.commit('changeBeatType', a) 
+
 
   },
 
@@ -38,7 +63,7 @@ Vue.mixin({
       if(this.$store.state.play){
         this.$stop()
         this.$store.commit(...param)
-        setTimeout(this.$start,50)
+        setTimeout(this.$start,15*this.$store.state.beatNum)
       }
       else this.$store.commit(...param)
     },
@@ -101,6 +126,7 @@ Vue.mixin({
       localStorage.removeItem('bg')
       this.$store.commit('changeBackground', undefined)
     },
+
 
   }
 })
